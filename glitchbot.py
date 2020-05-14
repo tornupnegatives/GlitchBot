@@ -12,8 +12,8 @@ from glitch_this import ImageGlitcher
 
 # Useful values
 SUPPORTED = ['.jpg', '.jpeg', '.png', '.gif']
-BOT_NAME = 'NAME#NUMBER' # Replace with bot's Discord name so it won't get stuck in a loop
-LOOP = 0    # Infinitely loop GIFs=0
+BOT_NAME = 'GlitchBot#3610'
+LOOP = 0    # Infinite=0
 client = discord.Client()
 
 #####################################
@@ -115,8 +115,8 @@ def do_glitch(local_url, type):
                     color_offset=bool(random.getrandbits(1)))
 
         # Get glitch filepath and save
-        glitch_url = '_.'.join(filepath.split('.'))
-        glitch[0].save(glitch_url,
+        glitch_url = '_.'.join(local_url.split('.'))
+        glitch_file[0].save(glitch_url,
                         format='GIF',
                         append_images=glitch_file[1:],
                         save_all=True,
@@ -142,5 +142,3 @@ except:
         
 # Start bot
 client.run(token)
-
-    
