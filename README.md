@@ -4,7 +4,8 @@ GlitchBot is a Discord bot capable of databending and datamoshing static images 
 
 ## Dependencies
 
-GlitchBot is a Python script that uses [glitch_this](https://github.com/TotallyNotChase/glitch-this) to perform databending operations. Please ensure that you have glitch_this and its dependencies installed before running GlitchBot.
+GlitchBot is a Python script powered by [discordpy](https://discordpy.readthedocs.io/en/latest/). It uses [glitch_this](https://github.com/TotallyNotChase/glitch-this) to perform databending operations. Please ensure that you discordpy, glitch_this, and all of their respective dependencies installed on your system before running GlitchBot.
+
 ## Usage
 
 ```python
