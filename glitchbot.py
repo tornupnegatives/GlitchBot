@@ -30,7 +30,7 @@ async def on_message(message):
     channel = message.channel
     
     # Listen for update command
-    if '!!!RESTART'  in message.content:
+    if '!glitchbot restart' in message.content.lower():
         print('Received restart command. Restarting...')
         os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
     
