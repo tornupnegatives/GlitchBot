@@ -32,8 +32,22 @@ async def on_message(message):
     # Listen for update command
     if '!glitchbot restart' in message.content.lower():
         print('Received restart command. Restarting...')
+        await channel.send('Restarting GlitchBot...')
         os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
     
+    # Status
+    elif '!glitchbot status' in message.content.lower():
+        status = f'{BOT_NAME} is currently online in channel {channel}'
+        await channel.send(status)
+
+    # Stats
+    elif '!glitchbot stats' in message.content.lower():
+        with open('stats.txt', 'r') as stats:
+            num_glitch = stats.read().count(f'{channel}')
+            await channel.send(
+            f'{BOT_NAME} has glitched '
+            + f'{num_glitch} images in channel {channel}') 
+
     # Get the first attachment (if there is one)
     elif len(message.attachments) > 0 and not message.author.bot:
         url = message.attachments[0].url
@@ -46,7 +60,7 @@ async def on_message(message):
             local_url = save_image(url, type)
             
             # Glitch the image file
-            glitch_url = do_glitch(local_url, type)
+            glitch_url = do_glitch(local_url, type, channel)
             
             # Send glitch to channel
             await channel.send(file=discord.File(glitch_url))
@@ -91,7 +105,7 @@ def random_filename(length):
     char_set = string.ascii_lowercase
     return ''.join(random.choice(char_set) for i in range(length))
     
-def do_glitch(local_url, type):
+def do_glitch(local_url, type, channel):
 
     glitcher = ImageGlitcher()
     
@@ -123,7 +137,11 @@ def do_glitch(local_url, type):
                         duration=duration_,
                         loop=LOOP)
         print(f'Saved animated glitch [{glitch_url}]')
-        
+
+    # Log glitch for stats
+    with open('stats.txt', 'a+') as stats:
+        stats.write(f'{channel}')
+
     return glitch_url
     
 #######################
@@ -139,6 +157,6 @@ try:
         print(f'Read token [{token}]')
 except:
     sys.exit('FATAL ERROR: Failed to read token')
-        
+
 # Start bot
 client.run(token)
