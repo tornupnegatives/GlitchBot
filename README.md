@@ -19,7 +19,15 @@ BOT_NAME = 'NAME#NUMBER' #Replace this with your bot's name (i.e. 'GlitchBot#123
 ```bash
 $ python3 glitchbot.py
 ```
-Once GlitchBot has been added to a channel and is running, send an image in that channel. If you need to restart the bot, send '!!!RESTART' (no quotes) in the channel. This is useful if you change the code. To keep the bot running on your remote server even after you quit, use [screens](https://linuxize.com/post/how-to-use-linux-screen/).
+Once GlitchBot has been added to a channel and is running, send an image in that channel with the caption '!glitchbot' (no quotes). If you need to restart the bot, send '!glitchbot restart' (no quotes) in the channel. This is useful if you change the code. To keep the bot running on your remote server even after you quit, use [screens](https://linuxize.com/post/how-to-use-linux-screen/).
+
+### Summary of Commands
+| Command | Description | Notes |
+|---------|----------|------|
+| !glitchbot | Glitch captioned image |   |
+| !glitchbot restart | Restarts bot and re-reads Python file | If line in .py containing this command has moved, the command will fail |
+| !glitchbot status | Sends the bot's online status to channel |   |
+| !glitchbot stats | Sends number of glitches performed in the channel | Currently unable to distinguish between different channels with identical names |
 
 ## Warning
 
