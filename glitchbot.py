@@ -29,39 +29,40 @@ async def on_message(message):
     # Get working channel
     channel = message.channel
     
-    # Listen for update command
-    if '!glitchbot restart' in message.content.lower():
-        print('Received restart command. Restarting...')
-        await channel.send('Restarting GlitchBot...')
-        os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
+    # Listen for commands
+    if '!glitchbot' in message.content:
     
-    # Status
-    elif '!glitchbot status' in message.content.lower():
-        status = f'{BOT_NAME} is currently online in channel {channel}'
-        await channel.send(status)
+        # For code updates (FAILS if line number of 'os.execl...' changes
+        if 'restart' in message.content:
+            print(f'{message.author} sent restart command. Restarting...')
+            await channel.send('Restarting GlitchBot...')
+            os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
 
-    # Stats
-    elif '!glitchbot stats' in message.content.lower():
-        with open('stats.txt', 'r') as stats:
-            num_glitch = stats.read().count(f'{channel}')
-            await channel.send(
-            f'{BOT_NAME} has glitched '
-            + f'{num_glitch} images in channel {channel}') 
+        elif 'status' in message.content:
+            status = f'{BOT_NAME} is currently online in channel {channel}'
+            await channel.send(status)
 
-    # Get the first attachment (if there is one)
-    elif len(message.attachments) > 0 and not message.author.bot:
-        url = message.attachments[0].url
-        type = image_type(url)
+        elif 'stats' in message.content:
+            with open('stats.txt', 'r') as stats:
+                num_glitch = stats.read().count(f'{channel}')
+                await channel.send(
+                f'{BOT_NAME} has glitched '
+                + f'{num_glitch} images in channel {channel}') 
 
-        if type != 'invalid':
-            print(f'{message.author} uploaded {url}')
+        # Get the first attachment (if there is one)
+        elif len(message.attachments) > 0:
+            url = message.attachments[0].url
+            type = image_type(url)
+
+            if type != 'invalid':
+                print(f'{message.author} uploaded {url}')
             
-            # Save image to disk with a shorter filename
-            local_url = save_image(url, type)
-            
-            # Glitch the image file
-            glitch_url = do_glitch(local_url, type, channel)
-            
+                # Save image to disk with a shorter filename
+                local_url = save_image(url, type)
+
+                # Glitch the image file
+                glitch_url = do_glitch(local_url, type, channel)
+                
             # Send glitch to channel
             await channel.send(file=discord.File(glitch_url))
             
