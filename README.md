@@ -10,12 +10,10 @@ GlitchBot is a Python script powered by [discordpy](https://discordpy.readthedoc
 
 ```python
 # Glitchbot.py
-BOT_NAME = 'NAME#NUMBER' #Replace this with your bot's name (i.e. 'GlitchBot#1234')
+BOT_NAME = 'NAME#NUMBER' # Replace this with your bot's name (i.e. 'GlitchBot#1234')
+TOKEN     = ''           # Put your bot token from Discord Developer Portal in between quotes
 ```
-```
-# token.txt
-# Place ONLY your bot's token (from Discord Developer Portal) in this file
-```
+
 ```bash
 $ python3 glitchbot.py
 ```
@@ -24,10 +22,11 @@ Once GlitchBot has been added to a channel and is running, send an image in that
 ### Summary of Commands
 | Command | Description | Notes |
 |---------|----------|------|
-| !glitchbot | Glitch captioned image |   |
-| !glitchbot restart | Restarts bot and re-reads Python file | If line in .py containing this command has moved, the command will fail |
-| !glitchbot status | Sends the bot's online status to channel |   |
-| !glitchbot stats | Sends number of glitches performed in the channel | Currently unable to distinguish between different channels with identical names |
+| !glitchbot | Glitch captioned image | can also use '!gb' |
+| !gb restart | Restarts bot and re-reads Python file | If line in .py containing this command has moved, the command will fail |
+| !gb shutdown | Terminates bot execution | |
+| !gb status | Sends the bot's online status to channel |   |
+| !gb stats | Sends number of glitches performed in the channel | Currently unable to distinguish between different channels with identical names |
 
 ## Warning
 
