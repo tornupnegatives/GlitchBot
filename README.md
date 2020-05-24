@@ -31,4 +31,4 @@ Once GlitchBot has been added to a channel and is running, send an image in that
 
 ## Warning
 
-This script was created just for fun, and has not been extensively tested for performance or security risks. Use at your own discretion!
+This script was created just for fun, and has not been extensively tested for performance or security risks. I am also by no means a Python expert... Use at your own discretion!
