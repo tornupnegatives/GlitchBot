@@ -1,38 +1,24 @@
-"""
-image.py contains routines for downloading images from the web
-"""
-import os
-import random
-
+import tempfile
 import requests
-import string
 
-SUPPORTED = ['.jpg', '.jpeg', '.png', '.gif']
+class Image:
+   def __init__(self, url):
+      self.url  = url
+      self.type = url.split('.')[-1]
 
-def getType(imageFile):
-    for extension in SUPPORTED:
-        if imageFile.endswith(extension):
-            return extension
-    return 'INVALID'
+   def __downloadRemoteImage(self):
+      request = requests.get(self.url)
 
-def randFilename(length):
-    charSet = string.ascii_lowercase
-    return ''.join(random.choice(charSet) for i in range(length))
+      return request
 
-def download(webURL, imageType):
-    # Download remote file
-    request   = requests.get(webURL, allow_redirects=True)
-    imageFile = f'tmp/{randFilename(5)}{imageType}'
+   @property
+   def content(self):
+      img = self.__downloadRemoteImage()
+      return img.content
 
-    # Save to disk and return filepath
-    if not os.path.exists('tmp'):
-        os.makedirs('tmp')
-
-    try:
-        with open(imageFile, 'wb') as local:
-            local.write(request.content)
-        print(f'Saved image as [{imageFile}]')
-        return imageFile
-
-    except:
-        print(f'ERROR: Failed to save image [{webURL}] to disk as [{imageFile}]')
+   @property
+   def asFile(self):
+      # filename = f'tmp.{self.type}'
+      f = tempfile.NamedTemporaryFile(suffix=f'.{self.type}')
+      f.write(self.content)
+      return f
