@@ -37,7 +37,7 @@ class Bot(discord.Client):
         msg = 'GlitchBot v2.0 Commands\n' + \
               '========================\n' + \
               '!gb: glitch attached image\n' + \
-              '!mm update: request update from server\n' + \
-              '!mm stop: shut down bot'
+              '!gb update: request update from server\n' + \
+              '!gb stop: shut down bot'
 
         await message.channel.send(msg)
